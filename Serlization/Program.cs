@@ -37,7 +37,7 @@ namespace Serlization
             jsonWriter.Close();
 
             sw.Close();
-        }
+        }   
 
         public object JsonDeserialize(Type dataype,string filePath) {
 
@@ -94,7 +94,7 @@ namespace Serlization
 
             FileStream fileStream;
 
-            BinaryFormatter bf = new BinaryFormatter();
+            BinaryFormatter binaryformatter = new BinaryFormatter();
 
             if (File.Exists(filePath)) {
                 File.Delete(filePath);
@@ -102,7 +102,7 @@ namespace Serlization
 
             fileStream = File.Create(filePath);
 
-            bf.Serialize(fileStream, data);
+            binaryformatter.Serialize(fileStream, data);
 
             fileStream.Close();
         }
@@ -113,12 +113,12 @@ namespace Serlization
 
             FileStream fileStream;
 
-            BinaryFormatter bf = new BinaryFormatter();
+            BinaryFormatter binaryformatter = new BinaryFormatter();
 
             if (File.Exists(filePath)) {
                 fileStream = File.OpenRead(filePath);
 
-                obj = bf.Deserialize(fileStream);
+                obj = binaryformatter.Deserialize(fileStream);
 
                 fileStream.Close();
             }
@@ -143,9 +143,9 @@ namespace Serlization
 
             //p = dataSerializer.BinaryDeserialize(filePath) as Person;
 
-            //dataSerializer.XmlSerialize(typeof(Person),person, filePath);
+            //dataSerializer.XmlSerialize(typeof(Person), person, filePath);
 
-            //p = dataSerializer.XmlDeserialize(typeof(Person) ,filePath) as Person;
+            //p = dataSerializer.XmlDeserialize(typeof(Person), filePath) as Person;
 
             dataSerializer.JsonSerialize(person, filePath);
 
